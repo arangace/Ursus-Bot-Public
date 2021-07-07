@@ -84,8 +84,8 @@ client.on("message", msg => {
             async function playSong() {
                 const dispatcher = connection.play(await ytdl(url), { type: 'opus' });
                 dispatcher.on('finish', () => {
+                    console.log(`It is ${ursusTime ? "ursus time" : "not ursus time"}`)
                     if (ursusTime) {
-                        console.log(`It is ${ursusTime ? "ursus time" : "not ursus time"}`)
                         playSong();
                     }
                     else {
