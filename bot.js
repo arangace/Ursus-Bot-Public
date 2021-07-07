@@ -62,7 +62,7 @@ client.on("message", msg => {
     };
     client.musicBot.onMessage(msg);
     if (msg.content === "!ping") {
-        msg.reply("David is really extremely gay");
+        msg.reply("David is really extremely super homosexual gay");
     }
     if (msg.content === "!tunak") {
         checkUrsusTime(msg);
