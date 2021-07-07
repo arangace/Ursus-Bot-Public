@@ -1,17 +1,17 @@
 {
-  "name": "discordbot",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "dayjs": "^1.10.5",
-    "discord.js": "^12.5.3",
-    "dotenv": "^10.0.0"
-  }
+    "name": "UrsusBot",
+    "version": "1.0.0",
+    "description": "Checks if it is ursus time and broadcasts",
+    "main": "bot.js",
+    "author": "Andy Huang",
+    "dependencies": {
+        "discord-music-system": "^3.3.15",
+        "discord-player": "^4.1.4",
+        "discord.io": "^2.5.3",
+        "discord.js": "^12.5.3",
+        "dotenv": "^10.0.0",
+        "missing": "0.0.1",
+        "nodemon": "^2.0.9",
+        "winston": "^3.3.3"
+    }
 }
