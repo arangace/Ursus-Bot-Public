@@ -9,7 +9,7 @@ var ursusTime = false;
 const { dispatcher } = require('discord.js');
 const { MusicBot } = require('discord-music-system'); // Require the best package ever created on NPM (= require discord-music-system)
 const ytdl = require('ytdl-core-discord');
-const channelIDs = ["693008958033494020", "544432533090205697"];
+const channelIDs = ["740859647287885875", "544432533090205697"];
 
 client.musicBot = new MusicBot(client, {
     ytApiKey: "AIzaSyC999TNfjGm_PNaAylM6CUoXHdqus_xTRk",
@@ -51,6 +51,45 @@ function checkUrsusTime(msg) {
     }
 }
 
+function playTunak(msg, force) {
+    const channel = client.channels.cache.get(channelIDs[0])
+    if (!channel) return console.error("The channel does not exist!");
+    channel.join().then(connection => {
+        // Yay, it worked!
+        console.log("Successfully connected.");
+
+        // playTunak = new MusicBot();
+        const url = "https://www.youtube.com/watch?v=vTIIMJ9tUc8&ab_channel=SonyMusicIndiaVEVO";
+        if (ursusTime === true) {
+            msg.reply("Ursus invites you to Tunak tunak");
+            playSong();
+        }
+        else if (force) {
+            playSong();
+        }
+        else {
+            msg.reply("It is not Ursus-Tunak time");
+        }
+        async function playSong() {
+            const dispatcher = connection.play(await ytdl(url), { type: 'opus' });
+            dispatcher.on('finish', () => {
+                console.log(`It is ${ursusTime ? "ursus time" : "not ursus time"}`)
+                if (ursusTime) {
+                    playSong();
+                }
+                else {
+                    dispatcher.setVoiceChannel(null);
+                }
+
+            });
+        }
+
+    }).catch(e => {
+        // Oh no, it errored!
+        console.error(e);
+    });
+}
+
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`)
     readline.close();
@@ -64,41 +103,13 @@ client.on("message", msg => {
     if (msg.content === "!ping") {
         msg.reply("David is really extremely super homosexual gay");
     }
+    if (msg.content === "!tunakAnyways") {
+        msg.reply("Ursus FORCES you to Tunak tunak");
+        playTunak(msg, true);
+    }
     if (msg.content === "!tunak") {
         checkUrsusTime(msg);
-        const channel = client.channels.cache.get(channelIDs[0])
-        if (!channel) return console.error("The channel does not exist!");
-        channel.join().then(connection => {
-            // Yay, it worked!
-            console.log("Successfully connected.");
-
-            // playTunak = new MusicBot();
-            const url = "https://www.youtube.com/watch?v=vTIIMJ9tUc8&ab_channel=SonyMusicIndiaVEVO";
-            if (ursusTime === true) {
-                msg.reply("Ursus invites you to Tunak tunak");
-                playSong();
-            }
-            else {
-                msg.reply("It is not Ursus-Tunak time");
-            }
-            async function playSong() {
-                const dispatcher = connection.play(await ytdl(url), { type: 'opus' });
-                dispatcher.on('finish', () => {
-                    console.log(`It is ${ursusTime ? "ursus time" : "not ursus time"}`)
-                    if (ursusTime) {
-                        playSong();
-                    }
-                    else {
-                        dispatcher.setVoiceChannel(null);
-                    }
-
-                });
-            }
-
-        }).catch(e => {
-            // Oh no, it errored!
-            console.error(e);
-        });
+        playTunak(msg, false);
 
     }
     if (msg.content === "!ursus") {
