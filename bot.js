@@ -6,7 +6,6 @@ const invalidInput = true;
 var currentTime;
 var ursusTime = false;
 
-const { dispatcher } = require('discord.js');
 const { MusicBot } = require('discord-music-system'); // Require the best package ever created on NPM (= require discord-music-system)
 const ytdl = require('ytdl-core-discord');
 const channelIDs = ["740859647287885875", "544432533090205697"];
@@ -58,7 +57,6 @@ function playTunak(msg, force) {
         // Yay, it worked!
         console.log("Successfully connected.");
 
-        // playTunak = new MusicBot();
         const url = "https://www.youtube.com/watch?v=vTIIMJ9tUc8&ab_channel=SonyMusicIndiaVEVO";
         if (ursusTime === true) {
             msg.reply("Ursus invites you to Tunak tunak");
@@ -100,9 +98,6 @@ client.on("message", msg => {
         return;
     };
     client.musicBot.onMessage(msg);
-    if (msg.content === "!ping") {
-        msg.reply("David is really extremely super homosexual gay");
-    }
     if (msg.content === "!tunakAnyways") {
         msg.reply("Ursus FORCES you to Tunak tunak");
         playTunak(msg, true);
