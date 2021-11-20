@@ -30,6 +30,7 @@ function getDateTime() {
 }
 
 function checkUrsusTime(msg) {
+    getDateTime();
     var currentHour = currentTime.split(':')[0];
     currentHour = parseInt(currentHour);
     console.log(currentHour);
@@ -98,21 +99,24 @@ client.on("message", msg => {
         return;
     };
     client.musicBot.onMessage(msg);
-    if (msg.content === "!tunakAnyways") {
+
+    //find the command within the defined commands
+    if (msg.content === `!help`) {
+        //send back all the commands
+    }
+    else if (msg.content === "!ursus") {
+        checkUrsusTime(msg);
+        console.log(`current time ${currentTime}`);
+    }
+    else if (msg.content === "!tunak") {
+        checkUrsusTime(msg);
+        if (ursusTime) playTunak(msg, false);
+    }
+    else if (msg.content === "!tunakAnyways") {
         msg.reply("Ursus FORCES you to Tunak tunak");
         playTunak(msg, true);
     }
-    if (msg.content === "!tunak") {
-        checkUrsusTime(msg);
-        playTunak(msg, false);
 
-    }
-    if (msg.content === "!ursus") {
-        console.log(`current time ${currentTime}`);
-        getDateTime();
-        checkUrsusTime(msg);
-        //checkRemainingUrsus();
-    }
 })
 
 getDateTime()
