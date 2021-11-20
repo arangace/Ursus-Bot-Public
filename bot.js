@@ -59,7 +59,7 @@ function playTunak(msg, force) {
         console.log("Successfully connected.");
 
         const url = "https://www.youtube.com/watch?v=vTIIMJ9tUc8&ab_channel=SonyMusicIndiaVEVO";
-        if (ursusTime === true) {
+        if ((ursusTime === true) && (!force)) {
             msg.reply("Ursus invites you to Tunak tunak");
             playSong();
         }
