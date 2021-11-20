@@ -1,15 +1,15 @@
+//imports
 const Discord = require("discord.js")
 require('dotenv').config();
 const client = new Discord.Client()
-const eventPeriod = false;
-const invalidInput = true;
+const { MusicBot } = require('discord-music-system');
+const ytdl = require('ytdl-core-discord');
+const channelIDs = ["740859647287885875", "544432533090205697"];
+//globals
 var currentTime;
 var ursusTime = false;
 
-const { MusicBot } = require('discord-music-system'); // Require the best package ever created on NPM (= require discord-music-system)
-const ytdl = require('ytdl-core-discord');
-const channelIDs = ["740859647287885875", "544432533090205697"];
-
+//music bot information
 client.musicBot = new MusicBot(client, {
     ytApiKey: "AIzaSyC999TNfjGm_PNaAylM6CUoXHdqus_xTRk",
     prefix: '!', // Your bot prefix

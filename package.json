@@ -4,6 +4,10 @@
     "description": "Checks if it is ursus time and broadcasts",
     "main": "bot.js",
     "author": "Andy Huang",
+    "scripts": {
+        "start": "node bot.js",
+        "dev":"nodemon bot.js"
+    },
     "dependencies": {
         "discord-music-system": "^3.3.15",
         "discord-player": "^4.1.4",
