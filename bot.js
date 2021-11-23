@@ -11,7 +11,7 @@ var ursusTime = false;
 
 //music bot information
 client.musicBot = new MusicBot(client, {
-    ytApiKey: "AIzaSyC999TNfjGm_PNaAylM6CUoXHdqus_xTRk",
+    ytApiKey: process.env.YTKEY,
     prefix: '!', // Your bot prefix
     language: 'en' // fr, en, es, pt
 });
