@@ -35,12 +35,12 @@ function checkUrsusTime(msg) {
     currentHour = parseInt(currentHour);
     console.log(currentHour);
     //UTC time for better readability
-    if ((currentHour >= 1) && (currentHour < 4)) {
+    if ((currentHour >= 1) && (currentHour < 3)) {
         msg.channel.send("Its ursus time");
         ursusTime = true;
         console.log("Its ursus time")
     }
-    else if ((currentHour >= 18) && (currentHour < 21)) {
+    else if ((currentHour >= 18) && (currentHour < 20)) {
         msg.channel.send("Its ursus time");
         ursusTime = true;
         console.log("Its ursus time")
