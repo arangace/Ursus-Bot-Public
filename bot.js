@@ -104,11 +104,13 @@ client.on("message", msg => {
         msg.reply('Current commands are !ursus, !tunak, !tunakAnyways');
     }
     else {
-        checkUrsusTime(msg);
+
         if (msg.content === "!ursus") {
+            checkUrsusTime(msg);
             console.log(`current time ${currentTime}`);
         }
         else if ((msg.content === "!tunak") && (ursusTime)) {
+            checkUrsusTime(msg);
             playTunak(msg, false);
         }
         else if (msg.content === "!tunakAnyways") {
