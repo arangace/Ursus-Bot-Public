@@ -72,6 +72,7 @@ function playTunak(msg, force) {
             console.log("Playing music..");
             const dispatcher = connection.play(await ytdl(url), { type: 'opus' });
             dispatcher.on('finish', () => {
+                dispatcher.setVoiceChannel(null);
                 // console.log(`It is ${ursusTime ? "ursus time" : "not ursus time"}`)
                 // if (ursusTime) {
                 //     playSong();
