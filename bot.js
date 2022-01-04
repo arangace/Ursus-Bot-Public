@@ -73,6 +73,7 @@ function playTunak(msg, force) {
             const dispatcher = connection.play(await ytdl(url), { type: 'opus' });
             dispatcher.on('finish', () => {
                 dispatcher.setVoiceChannel(null);
+                channel.leave()
                 // console.log(`It is ${ursusTime ? "ursus time" : "not ursus time"}`)
                 // if (ursusTime) {
                 //     playSong();
@@ -110,9 +111,10 @@ client.on("message", msg => {
             checkUrsusTime(msg);
             console.log(`current time ${currentTime}`);
         }
-        else if ((msg.content === "!tunak") && (ursusTime)) {
+        else if ((msg.content === "!tunak")) {
             checkUrsusTime(msg);
-            playTunak(msg, false);
+            ursusTime ? playTunak(msg, false) : msg.reply("Cannot Tunak when it's not Ursus Time")
+
         }
         else if (msg.content === "!tunakAnyways") {
             playTunak(msg, true);
