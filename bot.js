@@ -8,7 +8,10 @@ require('dotenv').config();
 const channelIDs = ["740859647287885875", "544432533090205697"];
 var currentTime;
 var ursusTime = false;
-const url = "https://www.youtube.com/watch?v=vTIIMJ9tUc8&ab_channel=SonyMusicIndiaVEVO";
+const url = [
+    "https://www.youtube.com/watch?v=i3pfsCS7fWI&ab_channel=TaKeRu9Z",
+    "https://www.youtube.com/watch?v=vTIIMJ9tUc8&ab_channel=SonyMusicIndiaVEVO"
+]
 
 //Setting music bot information
 client.musicBot = new MusicBot(client, {
@@ -49,7 +52,7 @@ function checkUrsusTime(msg) {
     }
 }
 
-function playTunak(msg, force) {
+function playSong(msg, force) {
     //Plays music based on whether or not it is the event time or if the user forces the bot to play music
     const channel = client.channels.cache.get(channelIDs[0])
     if (!channel) return console.error("The channel does not exist!");
@@ -57,23 +60,28 @@ function playTunak(msg, force) {
     channel.join().then(connection => {
         console.log("Successfully connected to channel..");
         if ((ursusTime === true) && (!force)) {
-            msg.reply("Ursus invites you to Tunak tunak");
+            msg.reply("Ursus invites you to singalong");
             playSong();
         }
         else if (force) {
-            msg.reply("Ursus FORCES you to Tunak tunak");
+            msg.reply("Ursus FORCES you to singalong");
             playSong();
         }
         else {
-            msg.reply("It is not Ursus-Tunak time");
+            msg.reply("It is not Ursus-singing time");
         }
 
         async function playSong() {
             console.log("Playing music..");
-            const dispatcher = connection.play(await ytdl(url), { type: 'opus' });
+            let randomNumber = Math.round(Math.random());
+            const dispatcher = connection.play(await ytdl(url[randomNumber]), { type: 'opus' });
             dispatcher.on('finish', () => {
-                dispatcher.setVoiceChannel(null);
-                channel.leave()
+                // dispatcher.setVoiceChannel(null);
+                setTimeout(() => {
+                    console.log("Leaving channel..");
+                    channel.leave();
+                }, 5000);
+
                 // console.log(`It is ${ursusTime ? "ursus time" : "not ursus time"}`)
                 // if (ursusTime) {
                 //     playSong();
@@ -103,7 +111,7 @@ client.on("message", msg => {
     //find the command within the defined commands
     if (msg.content === `!help`) {
         //send back all the commands
-        msg.reply('Current commands are !ursus, !tunak, !tunakAnyways');
+        msg.reply('Current commands are !ursus, !song, !ursusSing');
     }
     else {
 
@@ -111,13 +119,13 @@ client.on("message", msg => {
             checkUrsusTime(msg);
             console.log(`current time ${currentTime}`);
         }
-        else if ((msg.content === "!tunak")) {
+        else if ((msg.content === "!song")) {
             checkUrsusTime(msg);
-            ursusTime ? playTunak(msg, false) : msg.reply("Cannot Tunak when it's not Ursus Time")
+            ursusTime ? playSong(msg, false) : msg.reply("Cannot play music when it is not Ursus Time")
 
         }
-        else if (msg.content === "!tunakAnyways") {
-            playTunak(msg, true);
+        else if (msg.content === "!ursusSing") {
+            playSong(msg, true);
         }
     }
 })

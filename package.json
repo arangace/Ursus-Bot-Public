@@ -18,6 +18,6 @@
         "nodemon": "^2.0.9",
         "opusscript": "^0.0.8",
         "winston": "^3.3.3",
-        "ytdl-core": "^4.9.1"
+        "ytdl-core": "^4.10.0"
     }
 }
